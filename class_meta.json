@@ -1,0 +1,118 @@
+{
+  "'Ain": {
+    "huruf": "ع",
+    "latin": "'Ain"
+  },
+  "Alif": {
+    "huruf": "ا",
+    "latin": "Alif"
+  },
+  "Ba": {
+    "huruf": "ب",
+    "latin": "Ba"
+  },
+  "Dal": {
+    "huruf": "د",
+    "latin": "Dal"
+  },
+  "Dhad": {
+    "huruf": "ض",
+    "latin": "Dhad"
+  },
+  "Fa": {
+    "huruf": "ف",
+    "latin": "Fa"
+  },
+  "Ghain": {
+    "huruf": "غ",
+    "latin": "Ghain"
+  },
+  "Ha": {
+    "huruf": "ه",
+    "latin": "Ha"
+  },
+  "Jim": {
+    "huruf": "ح",
+    "latin": "Ḥa"
+  },
+  "Kaf": {
+    "huruf": "ج",
+    "latin": "Jim"
+  },
+  "Kha": {
+    "huruf": "ك",
+    "latin": "Kaf"
+  },
+  "Lam": {
+    "huruf": "خ",
+    "latin": "Kha"
+  },
+  "Mim": {
+    "huruf": "ل",
+    "latin": "Lam"
+  },
+  "Nun": {
+    "huruf": "م",
+    "latin": "Mim"
+  },
+  "Qaf": {
+    "huruf": "ن",
+    "latin": "Nun"
+  },
+  "Ra": {
+    "huruf": "ق",
+    "latin": "Qaf"
+  },
+  "Sin": {
+    "huruf": "ر",
+    "latin": "Ra"
+  },
+  "Syin": {
+    "huruf": "ص",
+    "latin": "Ṣad"
+  },
+  "Ta": {
+    "huruf": "س",
+    "latin": "Sin"
+  },
+  "Ta Marbutah": {
+    "huruf": "ش",
+    "latin": "Syin"
+  },
+  "Tsa": {
+    "huruf": "ت",
+    "latin": "Ta"
+  },
+  "Wau": {
+    "huruf": "ط",
+    "latin": "Ṭa"
+  },
+  "Ya": {
+    "huruf": "ة",
+    "latin": "Ta Marbutah"
+  },
+  "Zai": {
+    "huruf": "ث",
+    "latin": "Tsa"
+  },
+  "Żal": {
+    "huruf": "و",
+    "latin": "Wau"
+  },
+  "Ḥa": {
+    "huruf": "ي",
+    "latin": "Ya"
+  },
+  "Ṣad": {
+    "huruf": "ظ",
+    "latin": "Ẓa"
+  },
+  "Ṭa": {
+    "huruf": "ز",
+    "latin": "Zai"
+  },
+  "Ẓa": {
+    "huruf": "ذ",
+    "latin": "Żal"
+  }
+}
