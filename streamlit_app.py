@@ -66,11 +66,22 @@ if uploaded_file is not None:
 
     input_tensor = transform(image).unsqueeze(0)
 
+    #with torch.no_grad():
+        #logits = model(input_tensor)
+        #probs = F.softmax(logits, dim=1).squeeze(0)
+        #predicted_idx = int(torch.argmax(probs).item())
+        #confidence = float(probs[predicted_idx]) * 100
+
     with torch.no_grad():
-        logits = model(input_tensor)
-        probs = F.softmax(logits, dim=1).squeeze(0)
-        predicted_idx = int(torch.argmax(probs).item())
-        confidence = float(probs[predicted_idx]) * 100
+        outputs = model(input_tensor)
+        probs = F.softmax(outputs, dim=1)
+        predicted_idx = int(torch.argmax(probs, dim=1).item())
+        confidence = float(probs[0, predicted_idx].item()) * 100
+
+    st.write("Debug predicted_idx:", predicted_idx)  # boleh dihapus setelah fix
+    st.markdown(f"<div style='text-align:center; font-size:16px'>Confidence: {confidence:.2f}%</div>",
+            unsafe_allow_html=True)
+
 
     class_name = classes_order[predicted_idx]
     info = class_meta.get(class_name, {"huruf": "?", "latin": class_name})
