@@ -83,8 +83,3 @@ if uploaded_file is not None:
         st.markdown(f"<div style='text-align:center; font-size:20px'>{info['latin']}</div>", unsafe_allow_html=True)
         st.markdown(f"<div style='text-align:center; font-size:16px; opacity:0.8'>Confidence: {confidence:.2f}%</div>",
                     unsafe_allow_html=True)
-
-    # Debug sementara (hapus setelah fix)
-    st.write("DEBUG predicted_idx:", predicted_idx)
-    st.write("DEBUG class_name:", class_name)
-    st.write("DEBUG info:", info)
