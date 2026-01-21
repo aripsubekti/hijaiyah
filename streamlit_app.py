@@ -10,18 +10,25 @@ from collections import OrderedDict
 
 st.set_page_config(page_title="Deteksi Isyarat Hijaiyah", layout="centered")
 
+def load_json(path: Path):
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
 @st.cache_data
-def load_class_assets():
-    base = Path(__file__).resolve().parent
-
-    with open(base / "classes_order.json", "r", encoding="utf-8") as f:
-        classes_order = json.load(f)
-
-    with open(base / "class_meta.json", "r", encoding="utf-8") as f:
-        class_meta = json.load(f)
+def load_class_assets(classes_path_str: str, classes_mtime: float,
+                      meta_path_str: str, meta_mtime: float):
+    classes_order = load_json(Path(classes_path_str))
+    class_meta = load_json(Path(meta_path_str))
     return classes_order, class_meta
 
-classes_order, class_meta = load_class_assets()
+base = Path(__file__).resolve().parent
+classes_path = base / "classes_order.json"
+meta_path = base / "class_meta.json"
+
+classes_order, class_meta = load_class_assets(
+    str(classes_path), classes_path.stat().st_mtime,
+    str(meta_path), meta_path.stat().st_mtime
+)
 
 @st.cache_resource
 def load_model():
@@ -38,12 +45,7 @@ def load_model():
     if isinstance(state, dict) and any(k.startswith("module.") for k in state.keys()):
         state = OrderedDict((k.replace("module.", ""), v) for k, v in state.items())
 
-    missing, unexpected = model.load_state_dict(state, strict=False)
-    if missing or unexpected:
-        st.warning("State dict mismatch terdeteksi (cek arsitektur / jumlah kelas).")
-        st.write("Missing keys:", missing[:20])
-        st.write("Unexpected keys:", unexpected[:20])
-
+    model.load_state_dict(state, strict=True)
     model.eval()
     return model
 
@@ -66,32 +68,23 @@ if uploaded_file is not None:
 
     input_tensor = transform(image).unsqueeze(0)
 
-    #with torch.no_grad():
-        #logits = model(input_tensor)
-        #probs = F.softmax(logits, dim=1).squeeze(0)
-        #predicted_idx = int(torch.argmax(probs).item())
-        #confidence = float(probs[predicted_idx]) * 100
-
     with torch.no_grad():
         outputs = model(input_tensor)
         probs = F.softmax(outputs, dim=1)
         predicted_idx = int(torch.argmax(probs, dim=1).item())
         confidence = float(probs[0, predicted_idx].item()) * 100
 
-    st.write("Debug predicted_idx:", predicted_idx)  # boleh dihapus setelah fix
-    st.markdown(f"<div style='text-align:center; font-size:16px'>Confidence: {confidence:.2f}%</div>",
-            unsafe_allow_html=True)
-
-
     class_name = classes_order[predicted_idx]
     info = class_meta.get(class_name, {"huruf": "?", "latin": class_name})
 
-    huruf = info["huruf"]
-    latin = info["latin"]
-
     with col2:
         st.markdown("### Prediction")
-        st.markdown(f"<div style='font-size:80px; text-align:center'>{huruf}</div>", unsafe_allow_html=True)
-        st.markdown(f"<div style='text-align:center; font-size:20px'>{latin}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='font-size:80px; text-align:center'>{info['huruf']}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='text-align:center; font-size:20px'>{info['latin']}</div>", unsafe_allow_html=True)
         st.markdown(f"<div style='text-align:center; font-size:16px; opacity:0.8'>Confidence: {confidence:.2f}%</div>",
                     unsafe_allow_html=True)
+
+    # Debug sementara (hapus setelah fix)
+    st.write("DEBUG predicted_idx:", predicted_idx)
+    st.write("DEBUG class_name:", class_name)
+    st.write("DEBUG info:", info)
