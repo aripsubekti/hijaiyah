@@ -25,7 +25,7 @@ def load_model():
     num_classes = 30
     model = models.resnet50(weights=None)
     model.fc = torch.nn.Linear(model.fc.in_features, num_classes)
-    model.load_state_dict(torch.load("resnet50_final_model.pth", map_location="cpu"))
+    model.load_state_dict(torch.load("efficientnetb1_best_model_2s.pth", map_location="cpu"))
     model.eval()
     return model
 
