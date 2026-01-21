@@ -9,7 +9,13 @@ from collections import OrderedDict
 
 st.set_page_config(page_title="Deteksi Isyarat Hijaiyah", layout="centered")
 
-class_names = "class_names.json"
+@st.cache_data
+def load_class_names():
+    base = Path(__file__).resolve().parent
+    with open(base / "class_names.json", "r", encoding="utf-8") as f:
+        return json.load(f)
+
+class_names = load_class_names()
 
 @st.cache_resource
 def load_model():
