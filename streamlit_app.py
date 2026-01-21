@@ -9,15 +9,7 @@ from collections import OrderedDict
 
 st.set_page_config(page_title="Deteksi Isyarat Hijaiyah", layout="centered")
 
-@st.cache_data
-def load_class_names():
-    base = Path(__file__).resolve().parent
-    with open(base / "class_names.json", "r", encoding="utf-8") as f:
-        return json.load(f)
-
-class_names = load_class_names()
-
-NUM_CLASSES = len(class_names)
+class_names = "class_names.json"
 
 @st.cache_resource
 def load_model():
@@ -27,7 +19,7 @@ def load_model():
     model = models.efficientnet_b1(weights=None)
 
     in_features = model.classifier[1].in_features
-    model.classifier[1] = nn.Linear(in_features, NUM_CLASSES)
+    model.classifier[1] = nn.Linear(in_features, 29)
 
     state = torch.load(model_path, map_location="cpu")
 
