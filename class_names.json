@@ -7,7 +7,7 @@
   "5": { "huruf": "ف", "latin": "Fa" },
   "6": { "huruf": "غ", "latin": "Ghain" },
   "7": { "huruf": "ه", "latin": "Ha" },
-  "25": { "huruf": "ح", "latin": "Ḥa" },
+  "8": { "huruf": "ح", "latin": "Ḥa" },
   "9": { "huruf": "ج", "latin": "Jim" },
   "10": { "huruf": "ك", "latin": "Kaf" },
   "11": { "huruf": "خ", "latin": "Kha" },
@@ -24,7 +24,7 @@
   "22": { "huruf": "ة", "latin": "Ta Marbutah" },
   "23": { "huruf": "ث", "latin": "Tsa" },
   "24": { "huruf": "و", "latin": "Wau" },
-  "8": { "huruf": "ي", "latin": "Ya" },
+  "25": { "huruf": "ي", "latin": "Ya" },
   "26": { "huruf": "ظ", "latin": "Ẓa" },
   "27": { "huruf": "ز", "latin": "Zai" },
   "28": { "huruf": "ذ", "latin": "Żal" }
